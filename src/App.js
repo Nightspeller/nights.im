@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Footer from "./components/footer.js";
+import TopBar from "./components/topBar.js";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+import HomePage from "./pages/HomePage.js";
+import {ThemeProvider} from "@material-ui/core/styles";
+import {theme} from "./theme.js";
+import Resume from "./pages/Resume.js";
+import Portfolio from "./pages/Portfolio.js";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    return (
+        <React.Fragment>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Router>
+
+                    <TopBar/>
+                    <Switch>
+                        <Route exact path="/resume">
+                            <Resume/>
+                        </Route>
+                        <Route exact path="/portfolio">
+                            <Portfolio/>
+                        </Route>
+                        <Route exact path="/">
+                            <HomePage/>
+                        </Route>
+                    </Switch>
+                    <Footer/>
+
+                </Router>
+            </ThemeProvider>
+        </React.Fragment>
+    );
 }
-
-export default App;
